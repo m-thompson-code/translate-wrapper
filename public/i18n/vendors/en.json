@@ -1,0 +1,14 @@
+{
+  "app": {
+    "vendors": "en From vendors"
+  },
+  "vendors": {
+    "test": "en Vendors Test"
+  },
+  "override": {
+    "test": "en Override Test - Vendors"
+  },
+  "constructor": {
+    "test": "en Constructor Test - Vendors"
+  }
+}
