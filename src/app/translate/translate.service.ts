@@ -15,6 +15,16 @@ export abstract class TranslateService {
     interpolateParams?: InterpolationParameters
   ): Observable<string | any>;
 
+  // TODO: currentLang;
+
+  // TODO: addLangs
+
+  // TODO: setDefaultLang
+
+  // TODO: setFallbackLang
+
+  // TODO: getLangs
+
   abstract getCurrentLang(): string;
 
   abstract use(lang: string): void;
