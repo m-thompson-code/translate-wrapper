@@ -107,11 +107,7 @@ class MockTranslatePipe implements PipeTransform, OnDestroy {
   providedIn: 'root',
 })
 export class DelegateTranslatePipeService {
-  constructor() {
-    console.log('mocks -> DelegateTranslatePipeService.constructor');
-  }
-
-  // Create the service *in the view context* so its internal `inject(...)` works.
+  // Create the pipe *in the view context* so its internal `inject(...)` works.
   getPipe(injector: Injector): PipeTransform {
     return runInInjectionContext(injector, () => new MockTranslatePipe());
   }

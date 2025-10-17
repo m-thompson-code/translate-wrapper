@@ -3,9 +3,9 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { provideMockRootTranslations } from './translate';
-// import { provideNgxTranslateRootTranslations } from './translate/delegates/ngx-translate';
-// import { provideTranslocoRootTranslations } from './translate/delegates/transloco';
+// import { provideMockRootTranslations } from './translate';
+// import { provideNgxTranslateRootTranslations } from './translate';
+import { provideTranslocoRootTranslations } from './translate';
 
 
 export const appConfig: ApplicationConfig = {
@@ -13,10 +13,10 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     // For testing
-    provideMockRootTranslations(),
+    // provideMockRootTranslations(),
     // For ngx-translate
     // provideNgxTranslateRootTranslations(),
     // For transloco
-    // provideTranslocoRootTranslations(),
+    provideTranslocoRootTranslations(),
   ],
 };

@@ -16,11 +16,7 @@ import {
   providedIn: 'root',
 })
 export class DelegateTranslatePipeService {
-  constructor() {
-    console.log('transloco -> DelegateTranslatePipeService.constructor');
-  }
-
-  // Create the injectable *in the view context* so its internal `inject(...)` works.
+  // Create the pipe *in the view context* so its internal `inject(...)` works.
   getPipe(injector: Injector): PipeTransform {
     return runInInjectionContext(injector, () => {
       console.log('transloco -> DelegateTranslatePipeService.getPipe');

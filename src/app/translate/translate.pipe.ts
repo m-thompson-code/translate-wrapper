@@ -11,10 +11,6 @@ export class TranslatePipe implements PipeTransform {
   private readonly translatePipeService = inject(TranslatePipeService);
   private readonly pipe = this.translatePipeService.getPipe(inject(Injector));
 
-  constructor() {
-    console.log('TranslatePipe.constructor', { pipe: this.pipe });
-  }
-
   transform(
     query: string,
     params?: Params,

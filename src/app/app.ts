@@ -1,14 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
-import { startWith } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { startWith } from 'rxjs';
 import { TranslatePipe, TranslateService } from './translate';
+import { ExampleComponent } from "./example.component";
 
 @Component({
   selector: 'app-root',
   imports: [
     TranslatePipe,
     AsyncPipe,
-  ],
+    ExampleComponent
+],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

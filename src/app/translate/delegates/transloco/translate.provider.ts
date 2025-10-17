@@ -17,7 +17,6 @@ import { TranslatePipeService } from '../../translate-pipe.service';
 import { DelegateTranslatePipeService } from './delegate-translate-pipe.service';
 import { AVAILABLE_LANGUAGES, AVAILABLE_LANGUAGES_TOKEN, DEFAULT_LANGUAGE } from '../../shared';
 
-
 function deepMerge(target: any, source: any) {
   // If either isn't an object, return the source
   if (typeof target !== 'object' || target === null) return source;

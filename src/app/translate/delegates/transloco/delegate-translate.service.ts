@@ -15,10 +15,6 @@ export class DelegateTranslateService implements TranslateService {
     return this.translocoService.getActiveLang();
   }
 
-  constructor() {
-    console.log('transloco -> DelegateTranslateService.constructor', { translocoService: this.translocoService });
-  }
-
   instant(key: string | Array<string>, params?: Params): string | any {
     console.log('transloco -> instant', { key, params });
     return this.translocoService.translate(key, params);

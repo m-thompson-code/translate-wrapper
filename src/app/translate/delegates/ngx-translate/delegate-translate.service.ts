@@ -16,12 +16,6 @@ export class DelegateTranslateService implements TranslateService {
     return this._translateService.getCurrentLang();
   }
 
-  constructor() {
-    console.log('ngx-translate -> DelegateTranslateService.constructor', {
-      _translateService: this._translateService,
-    });
-  }
-
   instant(key: string | Array<string>, params?: Params): string | any {
     console.log('ngx-translate -> instant', { key, params });
     return this._translateService.instant(key, params);

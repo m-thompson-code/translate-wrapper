@@ -11,6 +11,7 @@
   "constructor": {
     "test": "de Constructor Test - Vendors"
   },
-  "chain": "transformed -> {{ value }}",
-  "chained": "completed"
+  "example": {
+    "title": "Example Title from DE Vendors"
+  }
 }

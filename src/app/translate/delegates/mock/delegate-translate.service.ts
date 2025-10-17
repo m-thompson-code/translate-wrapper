@@ -17,10 +17,6 @@ export class DelegateTranslateService implements TranslateService {
     return this.lang;
   }
 
-  constructor() {
-    console.log('mock -> DelegateTranslateService.constructor');
-  }
-
   private _instant(key: string, params?: Params): string {
     console.log('mock -> instant', this, this.lang, { key, params });
     return mockTranslate(this.lang, key, params);

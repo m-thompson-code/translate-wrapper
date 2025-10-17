@@ -5,11 +5,7 @@ import { TranslatePipe as _TranslatePipe } from '@ngx-translate/core';
   providedIn: 'root',
 })
 export class DelegateTranslatePipeService {
-  constructor() {
-    console.log('ngx-translate -> DelegateTranslatePipeService.constructor');
-  }
-
-  // Create the service *in the view context* so its internal `inject(...)` works.
+  // Create the pipe *in the view context* so its internal `inject(...)` works.
   getPipe(injector: Injector): PipeTransform {
     return runInInjectionContext(injector, () => new _TranslatePipe());
   }
