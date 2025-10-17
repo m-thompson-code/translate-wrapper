@@ -5,10 +5,11 @@ import {
   InjectionToken,
   isDevMode,
   makeEnvironmentProviders,
+  Provider,
 } from '@angular/core';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { Translation } from '@ngx-translate/core';
-import { provideTransloco, TranslocoLoader } from '@jsverse/transloco';
+import { provideTransloco, TranslocoLoader, TranslocoService } from '@jsverse/transloco';
 import { forkJoin, map, tap } from 'rxjs';
 import { TranslateService } from '../../translate.service';
 import { DelegateTranslateService } from './delegate-translate.service';
@@ -76,7 +77,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
   }
 }
 
-export const provideTranslate: () => EnvironmentProviders = () => {
+export const provideTranslocoRootTranslations: () => EnvironmentProviders = () => {
   return makeEnvironmentProviders([
     provideHttpClient(),
     provideTransloco({
@@ -94,3 +95,5 @@ export const provideTranslate: () => EnvironmentProviders = () => {
     { provide: TranslatePipeService, useClass: DelegateTranslatePipeService },
   ]);
 };
+
+export const provideTranslocoChildTranslations = (): Provider | EnvironmentProviders[] => TranslocoService;

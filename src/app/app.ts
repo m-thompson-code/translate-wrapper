@@ -1,8 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
-import { TranslatePipe } from './translate/translate.pipe';
-import { TranslateService } from './translate/translate.service';
 import { startWith } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { TranslatePipe, TranslateService } from './translate';
 
 @Component({
   selector: 'app-root',
@@ -29,11 +28,11 @@ export class App {
 
     // This is expected to be undefined since it fails to beat the race
     // condition of loading the translations
-    // console.log(this.translate.instant('constructor.test'));
+    console.log(this.translate.instant('constructor.test'));
 
-    // this.translate.stream('constructor.test').subscribe((translation) => {
-    //   console.log(translation);
-    // });
+    this.translate.stream('constructor.test').subscribe((translation) => {
+      console.log(translation);
+    });
   }
 
   toggleLang() {

@@ -1,2 +1,1 @@
 export * from './translate.provider';
-export * from './utility';

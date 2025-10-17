@@ -1,14 +1,14 @@
-import { EnvironmentProviders, makeEnvironmentProviders, provideAppInitializer } from "@angular/core";
+import { EnvironmentProviders, inject, makeEnvironmentProviders, provideAppInitializer, Provider } from "@angular/core";
 import { HttpBackend, provideHttpClient } from "@angular/common/http";
-import { provideTranslateService, TranslateLoader } from "@ngx-translate/core";
-// import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideChildTranslateService, provideTranslateService, TranslateLoader } from "@ngx-translate/core";
+// import { provideRootTranslationsHttpLoader } from '@ngx-translate/http-loader';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
-import{ TranslateService as _TranslateService } from "@ngx-translate/core"
+import { TranslateService as _TranslateService } from "@ngx-translate/core"
 import { TranslateService } from "../../translate.service";
 import { DelegateTranslateService } from "./delegate-translate.service";
 import { TranslatePipeService } from "../../translate-pipe.service";
 import { DelegateTranslatePipeService } from "./delegate-translate-pipe.service";
-import { DEFAULT_LANGUAGE } from "../../shared";
+import { AVAILABLE_LANGUAGES, DEFAULT_LANGUAGE } from "../../shared";
 
 function HttpLoaderFactory(httpBackend: HttpBackend) {
   return new MultiTranslateHttpLoader(httpBackend, [
@@ -18,11 +18,11 @@ function HttpLoaderFactory(httpBackend: HttpBackend) {
   ]);
 }
 
-export const provideTranslate: () => EnvironmentProviders = () => {
+export const provideNgxTranslateRootTranslations: () => EnvironmentProviders = () => {
   return makeEnvironmentProviders([
     provideHttpClient(),
     provideTranslateService({
-      // loader: provideTranslateHttpLoader({prefix:'./i18n/core/', suffix:'.json'}),
+      // loader: provideRootTranslationsHttpLoader({prefix:'./i18n/core/', suffix:'.json'}),
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
@@ -36,13 +36,16 @@ export const provideTranslate: () => EnvironmentProviders = () => {
      * internal version of TranslateService
      * */
     _TranslateService,
-    // provideAppInitializer(() => {
-    //   const translateService = _TranslateService;
-    //   translateService.setDefaultLang('en');
-    //   translateService.use('en');
-    // }),
+    provideAppInitializer(() => {
+      const translateService = inject(_TranslateService);
+      translateService.addLangs([...AVAILABLE_LANGUAGES]);
+      translateService.setFallbackLang(DEFAULT_LANGUAGE);
+      translateService.use(DEFAULT_LANGUAGE);
+    }),
     { provide: TranslateService, useClass: DelegateTranslateService },
     { provide: TranslatePipeService, useClass: DelegateTranslatePipeService },
     // TODO: stub out _TranslateService methods to avoid errors if used directly
   ]);
 }
+
+export const provideNgxTranslateChildTranslations = (): Provider | EnvironmentProviders[] => [provideChildTranslateService()];

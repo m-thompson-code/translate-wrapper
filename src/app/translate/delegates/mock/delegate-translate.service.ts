@@ -18,7 +18,7 @@ export class DelegateTranslateService implements TranslateService {
   }
 
   constructor() {
-    console.log('ngx-translate -> DelegateTranslateService.constructor');
+    console.log('mock -> DelegateTranslateService.constructor');
   }
 
   private _instant(key: string, params?: Params): string {
