@@ -22,11 +22,11 @@ export class App {
 
     // This is expected to be undefined since it fails to beat the race
     // condition of loading the translations
-    console.log(this.translate.instant('constructor.test'));
+    // console.log(this.translate.instant('constructor.test'));
 
-    this.translate.stream('constructor.test').subscribe((translation) => {
-      console.log(translation);
-    });
+    // this.translate.stream('constructor.test').subscribe((translation) => {
+    //   console.log(translation);
+    // });
   }
 
   toggleLang() {

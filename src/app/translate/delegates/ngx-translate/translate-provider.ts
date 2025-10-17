@@ -1,4 +1,4 @@
-import { EnvironmentProviders, makeEnvironmentProviders } from "@angular/core";
+import { EnvironmentProviders, makeEnvironmentProviders, provideAppInitializer } from "@angular/core";
 import { HttpBackend, provideHttpClient } from "@angular/common/http";
 import { provideTranslateService, TranslateLoader } from "@ngx-translate/core";
 // import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -8,6 +8,7 @@ import { TranslateService } from "../../translate.service";
 import { DelegateTranslateService } from "./delegate-translate.service";
 import { TranslatePipeService } from "../../translate-pipe.service";
 import { DelegateTranslatePipeService } from "./delegate-translate-pipe.service";
+import { DEFAULT_LANGUAGE } from "../../shared";
 
 function HttpLoaderFactory(httpBackend: HttpBackend) {
   return new MultiTranslateHttpLoader(httpBackend, [
@@ -27,11 +28,21 @@ export const provideTranslate: () => EnvironmentProviders = () => {
         useFactory: HttpLoaderFactory,
         deps: [HttpBackend],
       },
-      lang: 'en',
-      fallbackLang: 'en',
+      lang: DEFAULT_LANGUAGE,
+      fallbackLang: DEFAULT_LANGUAGE,
     }),
+    /**
+     * Expose TranslateService as alias _TranslateService to use internally for
+     * internal version of TranslateService
+     * */
     _TranslateService,
+    // provideAppInitializer(() => {
+    //   const translateService = _TranslateService;
+    //   translateService.setDefaultLang('en');
+    //   translateService.use('en');
+    // }),
     { provide: TranslateService, useClass: DelegateTranslateService },
     { provide: TranslatePipeService, useClass: DelegateTranslatePipeService },
+    // TODO: stub out _TranslateService methods to avoid errors if used directly
   ]);
 }

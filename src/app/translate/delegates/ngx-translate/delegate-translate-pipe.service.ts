@@ -1,11 +1,10 @@
-import { Injectable, Injector, PipeTransform, runInInjectionContext } from "@angular/core";
-import { TranslatePipe as _TranslatePipe } from "@ngx-translate/core";
+import { Injectable, Injector, PipeTransform, runInInjectionContext } from '@angular/core';
+import { TranslatePipe as _TranslatePipe } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DelegateTranslatePipeService {
-
   constructor() {
     console.log('ngx-translate -> DelegateTranslatePipeService.constructor');
   }

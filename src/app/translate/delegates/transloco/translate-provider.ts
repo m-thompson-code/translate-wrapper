@@ -2,6 +2,7 @@ import {
   EnvironmentProviders,
   inject,
   Injectable,
+  InjectionToken,
   isDevMode,
   makeEnvironmentProviders,
 } from '@angular/core';
@@ -13,6 +14,8 @@ import { TranslateService } from '../../translate.service';
 import { DelegateTranslateService } from './delegate-translate.service';
 import { TranslatePipeService } from '../../translate-pipe.service';
 import { DelegateTranslatePipeService } from './delegate-translate-pipe.service';
+import { AVAILABLE_LANGUAGES, AVAILABLE_LANGUAGES_TOKEN, DEFAULT_LANGUAGE } from '../../shared';
+
 
 function deepMerge(target: any, source: any) {
   // If either isn't an object, return the source
@@ -78,14 +81,15 @@ export const provideTranslate: () => EnvironmentProviders = () => {
     provideHttpClient(),
     provideTransloco({
       config: {
-        availableLangs: ['en', 'de'],
-        defaultLang: 'en',
+        availableLangs: [...AVAILABLE_LANGUAGES],
+        defaultLang: DEFAULT_LANGUAGE,
         // Remove this option if your application doesn't support changing language in runtime.
         reRenderOnLangChange: true,
         prodMode: !isDevMode(),
       },
       loader: TranslocoHttpLoader,
     }),
+    { provide: AVAILABLE_LANGUAGES_TOKEN, useValue: AVAILABLE_LANGUAGES },
     { provide: TranslateService, useClass: DelegateTranslateService },
     { provide: TranslatePipeService, useClass: DelegateTranslatePipeService },
   ]);

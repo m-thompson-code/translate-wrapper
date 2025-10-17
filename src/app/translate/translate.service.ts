@@ -1,29 +1,30 @@
-import { InterpolationParameters } from "@ngx-translate/core";
 import { Observable } from "rxjs";
+import { Params } from "./shared";
 
 /** Injection token is the abstract class itself. */
 export abstract class TranslateService {
   abstract readonly onLangChange: Observable<string>;
 
   abstract instant(
-    key: string | string[],
-    interpolateParams?: InterpolationParameters
+    key: string,
+    params?: Params
   ): string | any;
 
   abstract stream(
-    key: string | string[],
-    interpolateParams?: InterpolationParameters
+    key: string,
+    params?: Params
   ): Observable<string | any>;
 
-  // TODO: currentLang;
+  /**
+   * deprecated - use `getCurrentLang()` instead
+   */
+  abstract currentLang: string;
 
   // TODO: addLangs
-
   // TODO: setDefaultLang
-
   // TODO: setFallbackLang
 
-  // TODO: getLangs
+  abstract getLangs(): readonly string[];
 
   abstract getCurrentLang(): string;
 

@@ -10,5 +10,7 @@
   },
   "constructor": {
     "test": "de Constructor Test - Vendors"
-  }
+  },
+  "chain": "transformed -> {{ value }}",
+  "chained": "completed"
 }

@@ -8,7 +8,7 @@ import {
   runInInjectionContext,
 } from '@angular/core';
 import { DelegateTranslateService } from './delegate-translate.service';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { TranslateService } from '../../translate.service';
 
@@ -76,23 +76,23 @@ class MockTranslatePipe implements PipeTransform, OnDestroy {
   private readonly translateService = inject(TranslateService) as DelegateTranslateService;
   private readonly asyncPipe = inject(AsyncPipe);
 
-  cachedValue: string | null = null;
+  cachedKey: string | null = null;
   cachedParams: Record<string, any> | null = null;
   stream$: Observable<any> | null = null;
 
-  getStream(value: string | string[]): Observable<any> {
-    return this.translateService._stream(value);
+  getStream(key: string, params: Record<string, any> | undefined): Observable<any> {
+    return this.translateService._stream(key, params);
   }
 
-  transform(value: string, params?: Record<string, any>): string | any {
-    if (value === this.cachedValue && !isDifferent(params, this.cachedParams)) {
+  transform(key: string, params?: Record<string, any>): string | any {
+    if (key === this.cachedKey && !isDifferent(params, this.cachedParams)) {
       return this.asyncPipe.transform(this.stream$);
     }
 
-    this.cachedValue = value;
+    this.cachedKey = key;
     this.cachedParams = params ?? null;
 
-    this.stream$ = this.getStream(value);
+    this.stream$ = this.getStream(key, params);
 
     return this.asyncPipe.transform(this.stream$);
   }

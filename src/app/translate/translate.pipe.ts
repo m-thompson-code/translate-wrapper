@@ -1,5 +1,6 @@
 import { inject, Injector, Pipe, PipeTransform } from '@angular/core';
 import { TranslatePipeService } from './translate-pipe.service';
+import { Params } from './shared';
 
 @Pipe({
   name: 'translate',
@@ -14,7 +15,11 @@ export class TranslatePipe implements PipeTransform {
     console.log('TranslatePipe.constructor', { pipe: this.pipe });
   }
 
-  transform(query: string, params?: Record<string, any>/* TODO: only transloco does: , inlineLang?: string */): string | undefined {
+  transform(
+    query: string,
+    params?: Params,
+    /* TODO: only transloco does: , inlineLang?: string */
+  ): string {
     return this.pipe.transform(query, params);
   }
 }

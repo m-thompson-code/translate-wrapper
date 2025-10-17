@@ -2,21 +2,25 @@
 <button (click)="toggleLang()">
   Toggle Language
 </button>
-
-<h2>Loading core</h2>
+<!--
+<h2>Core (dependency)</h2>
 <div>{{ 'app.title' | translate }}</div>
 <div>{{ 'app.hello' | translate: { value: title() } }}</div>
 
-<h2>Loading core and vendors using the same key ("app")</h2>
+<h2>Vendor and Core using the same root key ("app")</h2>
 
 <div>{{ 'app.core' | translate }}</div>
 <div>{{ 'app.vendors' | translate }}</div>
 
-<h2>Loading core and vendors using different key ("core" and "vendors")</h2>
+<h2>Vendor and Core using different root key ("core" and "vendors")</h2>
 
 <div>{{ 'core.test' | translate }}</div>
 <div>{{ 'vendors.test' | translate }}</div>
 
-<h2>Loading core and vendors and having conflicting key ("override")</h2>
+<h2>Vendor and Core and having conflicting key ("override")</h2>
 <p>Order listed resource prefixes determines outcome. Last one defined overrides final result</p>
-<div>{{ 'override.test' | translate }}</div>
+<div>{{ 'override.test' | translate }}</div> -->
+
+<h2>Vendor nested example</h2>
+<div>{{ 'chain' | translate: { value: 'test' } }}</div>
+<div>{{ 'chain' | translate: { value: '\{\{ chained \}\}' } }}</div>
