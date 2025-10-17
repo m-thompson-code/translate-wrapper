@@ -1,8 +1,10 @@
 <h1>Hello World</h1>
+<p>Languages: {{ languages }}</p>
+<p>Language: {{ currentLanguage$ | async }}</p>
 <button (click)="toggleLang()">
   Toggle Language
 </button>
-<!--
+
 <h2>Core (dependency)</h2>
 <div>{{ 'app.title' | translate }}</div>
 <div>{{ 'app.hello' | translate: { value: title() } }}</div>
@@ -19,7 +21,7 @@
 
 <h2>Vendor and Core and having conflicting key ("override")</h2>
 <p>Order listed resource prefixes determines outcome. Last one defined overrides final result</p>
-<div>{{ 'override.test' | translate }}</div> -->
+<div>{{ 'override.test' | translate }}</div>
 
 <h2>Vendor nested example</h2>
 <div>{{ 'chain' | translate: { value: 'test' } }}</div>
